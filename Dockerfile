@@ -29,4 +29,4 @@ COPY --from=builder /app/pocketbase/pocketbase ./
 # 포트는 Railway 환경변수 $PORT를 사용하도록 설정
 # EXPOSE 8090은 지워도 무방합니다. Railway가 $PORT를 통해 알아서 감지합니다.
 
-CMD ["sh", "-c", "./pocketbase serve --http 0.0.0.0:$PORT --dir /app/pocketbase/pb_data"]
+CMD ["sh", "-c", "./pocketbase serve --http 0.0.0.0:${PORT:-8080} --dir /app/pocketbase/pb_data"]
