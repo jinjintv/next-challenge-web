@@ -17,9 +17,6 @@ WORKDIR /root/project
 # 빌드한 PocketBase 실행 파일 복사
 COPY --from=builder /root/project/pocketbase ./pocketbase
 
-# 필요하면 static 파일도 복사
-COPY pocketbase/public ./pocketbase/public
-
 # 포트 오픈
 EXPOSE 8090
 
