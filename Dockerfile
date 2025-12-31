@@ -1,11 +1,13 @@
 # 1. 빌드 이미지
 FROM golang:1.21-alpine AS builder
 
+# 작업 디렉토리
 WORKDIR /app
 
-# 전체 pocketbase 소스를 컨테이너에 복사
+# pocketbase 소스 전체를 컨테이너로 복사
 COPY pocketbase/ ./pocketbase/
 
+# pocketbase 디렉토리로 이동
 WORKDIR /app/pocketbase
 
 # PocketBase 빌드
@@ -16,7 +18,7 @@ FROM alpine:latest
 
 WORKDIR /app
 
-# 빌드 결과물 복사
+# 빌드 결과물과 데이터 폴더 복사
 COPY --from=builder /app/pocketbase/pocketbase ./
 COPY --from=builder /app/pocketbase/pb_data ./pb_data
 
