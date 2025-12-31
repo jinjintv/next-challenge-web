@@ -1,12 +1,8 @@
 [build]
-  # 루트 디렉토리에 package.json이 있으므로 base는 비워두거나 생략합니다.
   command = "pnpm run build"
-  # Vite 빌드 결과물이 나오는 위치입니다. 
-  # (vite build 기본값이 dist이므로, Express 빌드 파일과 섞일 수 있으니 주의가 필요합니다)
-  publish = "dist"
+  publish = "dist/client"  # 여기가 핵심입니다!
 
 [[redirects]]
-  # React/Vite SPA 라우팅을 위해 모든 요청을 index.html로 보냅니다.
   from = "/*"
   to = "/index.html"
   status = 200
