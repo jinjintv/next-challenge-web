@@ -1,16 +1,13 @@
 # 1. 베이스 Go 이미지
 FROM golang:1.21 AS builder
 
-WORKDIR /app
+WORKDIR /app/pocketbase
 
-# go.mod, go.sum 복사 후 의존성 설치
-COPY go.mod go.sum ./
+# 소스 안으로 들어가서 복사
+COPY pocketbase/go.mod pocketbase/go.sum ./
 RUN go mod download
 
-# 나머지 소스 복사
-COPY . .
-
-# PocketBase 빌드
+COPY pocketbase/ . 
 RUN go build -o pocketbase ./cmd/pocketbase
 
 # 2. 경량 런타임 이미지
