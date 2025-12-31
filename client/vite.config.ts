@@ -5,6 +5,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: './',
   resolve: {
     alias: {
       // @ 기호를 src 폴더 경로로 매핑합니다.
