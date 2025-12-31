@@ -20,19 +20,13 @@ COPY pocketbase/ .
 RUN go build -o pocketbase ./cmd/pocketbase
 
 # 2. Runtime 단계: 경량 이미지
+# ... (앞부분 동일)
 FROM alpine:latest
 RUN apk add --no-cache ca-certificates
-
 WORKDIR /app/pocketbase
 COPY --from=builder /app/pocketbase/pocketbase ./
 
-# Railway 환경변수 PORT가 없을 경우를 대비해 기본값 8080 설정
-ENV PORT=8080
+# 포트는 Railway 환경변수 $PORT를 사용하도록 설정
+# EXPOSE 8090은 지워도 무방합니다. Railway가 $PORT를 통해 알아서 감지합니다.
 
-EXPOSE $PORT
-
-# 데이터 폴더를 위한 볼륨 확보용 (Railway Volume과 연결 필수)
-VOLUME ["/app/pocketbase/pb_data"]
-
-# 직접 실행 방식으로 변경하여 시그널 전달 최적화
-ENTRYPOINT ["./pocketbase", "serve", "--http", "0.0.0.0:8080"]
+CMD ["sh", "-c", "./pocketbase serve --http 0.0.0.0:$PORT --dir /app/pocketbase/pb_data"]
