@@ -1,9 +1,8 @@
 [build]
   command = "pnpm run build"
-  publish = "dist/public"
+  publish = "client/dist"  # 생성된 위치에 맞게 수정
 
 [[redirects]]
-  # SPA 라우팅 설정
   from = "/*"
   to = "/index.html"
   status = 200
