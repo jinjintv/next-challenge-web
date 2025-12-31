@@ -1,22 +1,17 @@
-# 1. Go 빌드용 이미지
-FROM golang:1.21-alpine AS builder
+# 1. Go 공식 이미지에서 빌드
+FROM golang:1.21 AS builder
 
-# 필요한 패키지 설치
-RUN apk add --no-cache git
-
-# PocketBase 소스 복사
+# 작업 디렉토리
 WORKDIR /app
-COPY pocketbase/ ./pocketbase/
 
-# 빌드
-WORKDIR /app/pocketbase
+# 모듈 파일만 먼저 복사
+COPY go.mod go.sum ./
+
+# 의존성 설치 (캐시 활용 가능)
+RUN go mod download
+
+# 나머지 소스 복사
+COPY . .
+
+# PocketBase 빌드
 RUN go build -o pocketbase ./cmd/pocketbase
-
-# 2. 경량 런타임 이미지
-FROM alpine:latest
-WORKDIR /app
-COPY --from=builder /app/pocketbase/pocketbase ./pocketbase
-COPY --from=builder /app/pocketbase/public ./pocketbase/public
-
-EXPOSE 8090
-CMD ["./pocketbase", "serve", "--http", ":8090"]
