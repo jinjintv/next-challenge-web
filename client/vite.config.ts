@@ -1,11 +1,12 @@
 // vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
-  base: './',
+  plugins: [react(),tailwindcss(),],
+  base: '/',
   resolve: {
     alias: {
       // @ 기호를 src 폴더 경로로 매핑합니다.
