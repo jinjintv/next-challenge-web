@@ -1,6 +1,6 @@
 [build]
   command = "pnpm run build"
-  publish = "dist/client"  # 여기가 핵심입니다!
+  publish = "dist/public"  # 생성된 폴더 이름에 맞게 수정
 
 [[redirects]]
   from = "/*"
