@@ -1,6 +1,6 @@
 [build]
   command = "pnpm run build"
-  publish = "client/dist"  # 생성된 위치에 맞게 수정
+  publish = "client/dist"
 
 [[redirects]]
   from = "/*"
