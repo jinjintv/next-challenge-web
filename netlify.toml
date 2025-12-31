@@ -7,7 +7,7 @@
   
   # base(client) 폴더를 기준으로 생성된 결과물 폴더입니다.
   # 올려주신 이미지상 결과물은 client/dist에 생기므로 "dist"라고 적습니다.
-  publish = "client/dist"
+  publish = "dist"
 
 [[redirects]]
   # SPA(Single Page Application) 라우팅 지원
